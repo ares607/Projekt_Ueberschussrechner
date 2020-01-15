@@ -75,17 +75,17 @@
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
-                              <Component id="buttonAddEinnahme" min="-2" max="-2" attributes="0"/>
+                              <Component id="buttonEinnahme" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <Component id="addBuchungsausgabe" min="-2" pref="73" max="-2" attributes="0"/>
+                      <Component id="buttonAusgabe" min="-2" pref="73" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jLabelTitelBuchung" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="jFormattedTextFieldBuchungsdatum" min="-2" pref="77" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
-                      <Component id="textFieldBuchungsbetrag" min="-2" pref="77" max="-2" attributes="0"/>
+                      <Component id="textBetrag" min="-2" pref="77" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -105,12 +105,12 @@
               <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jFormattedTextFieldBuchungsdatum" min="-2" max="-2" attributes="0"/>
-                  <Component id="textFieldBuchungsbetrag" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Component id="textBetrag" alignment="1" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="buttonAddEinnahme" min="-2" max="-2" attributes="0"/>
-                  <Component id="addBuchungsausgabe" min="-2" max="-2" attributes="0"/>
+                  <Component id="buttonEinnahme" min="-2" max="-2" attributes="0"/>
+                  <Component id="buttonAusgabe" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -128,23 +128,23 @@
         <Property name="text" type="java.lang.String" value="Betrag"/>
       </Properties>
     </Component>
-    <Component class="java.awt.Button" name="buttonAddEinnahme">
+    <Component class="java.awt.Button" name="buttonEinnahme">
       <Properties>
         <Property name="label" type="java.lang.String" value="Einnahme"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonAddEinnahmeActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonEinnahmeActionPerformed"/>
       </Events>
     </Component>
-    <Component class="java.awt.Button" name="addBuchungsausgabe">
+    <Component class="java.awt.Button" name="buttonAusgabe">
       <Properties>
         <Property name="label" type="java.lang.String" value="Ausgabe"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonAusgabeActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="java.awt.TextField" name="textFieldBuchungsbetrag">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="textField1"/>
-      </Properties>
+    <Component class="java.awt.TextField" name="textBetrag">
     </Component>
     <Component class="javax.swing.JFormattedTextField" name="jFormattedTextFieldBuchungsdatum">
       <Properties>

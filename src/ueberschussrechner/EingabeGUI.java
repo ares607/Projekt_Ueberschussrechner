@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package ueberschussrechner;
+import java.util.*;
 
 /**
  *
@@ -32,9 +33,9 @@ public class EingabeGUI extends javax.swing.JFrame {
         jLabelTitel = new javax.swing.JLabel();
         jLabelBuchungsdatum = new javax.swing.JLabel();
         jLabelBuchungsbetrag = new javax.swing.JLabel();
-        buttonAddEinnahme = new java.awt.Button();
-        addBuchungsausgabe = new java.awt.Button();
-        textFieldBuchungsbetrag = new java.awt.TextField();
+        buttonEinnahme = new java.awt.Button();
+        buttonAusgabe = new java.awt.Button();
+        textBetrag = new java.awt.TextField();
         jFormattedTextFieldBuchungsdatum = new javax.swing.JFormattedTextField();
         jLabelTitelBuchung = new javax.swing.JLabel();
 
@@ -69,16 +70,19 @@ public class EingabeGUI extends javax.swing.JFrame {
 
         jLabelBuchungsbetrag.setText("Betrag");
 
-        buttonAddEinnahme.setLabel("Einnahme");
-        buttonAddEinnahme.addActionListener(new java.awt.event.ActionListener() {
+        buttonEinnahme.setLabel("Einnahme");
+        buttonEinnahme.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonAddEinnahmeActionPerformed(evt);
+                buttonEinnahmeActionPerformed(evt);
             }
         });
 
-        addBuchungsausgabe.setLabel("Ausgabe");
-
-        textFieldBuchungsbetrag.setText("textField1");
+        buttonAusgabe.setLabel("Ausgabe");
+        buttonAusgabe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonAusgabeActionPerformed(evt);
+            }
+        });
 
         jFormattedTextFieldBuchungsdatum.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
 
@@ -100,14 +104,14 @@ public class EingabeGUI extends javax.swing.JFrame {
                                 .addComponent(jLabelBuchungsbetrag)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(buttonAddEinnahme, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(buttonEinnahme, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(10, 10, 10)))
-                        .addComponent(addBuchungsausgabe, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(buttonAusgabe, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabelTitelBuchung)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jFormattedTextFieldBuchungsdatum, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(45, 45, 45)
-                        .addComponent(textFieldBuchungsbetrag, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(textBetrag, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(48, 48, 48)))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
@@ -122,20 +126,48 @@ public class EingabeGUI extends javax.swing.JFrame {
                 .addGap(1, 1, 1)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jFormattedTextFieldBuchungsdatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textFieldBuchungsbetrag, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(textBetrag, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(buttonAddEinnahme, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(addBuchungsausgabe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(buttonEinnahme, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buttonAusgabe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void buttonAddEinnahmeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddEinnahmeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_buttonAddEinnahmeActionPerformed
+    ArrayList<Integer> einnahmen = new ArrayList<Integer>();
+    ArrayList<Integer> ausgaben = new ArrayList<Integer>();
+    
+    private void buttonEinnahmeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEinnahmeActionPerformed
+        // Button Einnahme addet die Zahl zur ArrayList einnahmen. Ausgabe nur Pos 0 im Array.
+        
+        String ergEinnahmen = textBetrag.getText();
+        int zahlEinnahmen = 0;
+        try{
+            zahlEinnahmen = Integer.parseInt(ergEinnahmen);
+        }catch(NumberFormatException ex){
+            //Fehlerbehandlung
+        }
+        einnahmen.add(zahlEinnahmen);
+        textBetrag.setText("");
+        System.out.println("Einnahmen Pos 0: " + einnahmen.get(0));
+    }//GEN-LAST:event_buttonEinnahmeActionPerformed
+
+    private void buttonAusgabeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAusgabeActionPerformed
+        // Button Ausgabe addet die Zahl zur ArrayList ausgaben. Ausgabe nur Pos 0 im Array.
+        String ergAusgaben = textBetrag.getText();
+        int zahlAusgaben = 0;
+        try{
+            zahlAusgaben  = Integer.parseInt(ergAusgaben );
+        }catch(NumberFormatException ex){
+            //Fehlerbehandlung
+        }
+        ausgaben.add(zahlAusgaben );
+        textBetrag.setText("");
+        System.out.println("Einnahmen Pos 0: " + einnahmen.get(0));
+    }//GEN-LAST:event_buttonAusgabeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -173,8 +205,8 @@ public class EingabeGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private java.awt.Button addBuchungsausgabe;
-    private java.awt.Button buttonAddEinnahme;
+    private java.awt.Button buttonAusgabe;
+    private java.awt.Button buttonEinnahme;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JFormattedTextField jFormattedTextFieldBuchungsdatum;
     private javax.swing.JFrame jFrame1;
@@ -182,6 +214,6 @@ public class EingabeGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelBuchungsdatum;
     private javax.swing.JLabel jLabelTitel;
     private javax.swing.JLabel jLabelTitelBuchung;
-    private java.awt.TextField textFieldBuchungsbetrag;
+    private java.awt.TextField textBetrag;
     // End of variables declaration//GEN-END:variables
 }
