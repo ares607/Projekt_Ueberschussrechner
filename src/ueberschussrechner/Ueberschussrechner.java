@@ -16,6 +16,12 @@ public class Ueberschussrechner {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        
+        //Erstellung der GUI und dann Visibilität
+        GUI Fenster = new GUI();
+        Fenster.setVisible(true);
+        
+        
     }
     
 }

@@ -27,25 +27,14 @@ public class GUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jDialog1 = new javax.swing.JDialog();
         jInternalFrame1 = new javax.swing.JInternalFrame();
+        jDialog2 = new javax.swing.JDialog();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableAnzeigetabelle = new javax.swing.JTable();
         jLabelTitel = new javax.swing.JLabel();
         jButtonBuchungsfenster = new javax.swing.JButton();
         jLabelGesamtbetragZahl = new javax.swing.JLabel();
         jLabelGesamtbetraganzeige = new javax.swing.JLabel();
-
-        javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
-        jDialog1.getContentPane().setLayout(jDialog1Layout);
-        jDialog1Layout.setHorizontalGroup(
-            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        jDialog1Layout.setVerticalGroup(
-            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
 
         jInternalFrame1.setVisible(true);
 
@@ -58,6 +47,17 @@ public class GUI extends javax.swing.JFrame {
         jInternalFrame1Layout.setVerticalGroup(
             jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jDialog2Layout = new javax.swing.GroupLayout(jDialog2.getContentPane());
+        jDialog2.getContentPane().setLayout(jDialog2Layout);
+        jDialog2Layout.setHorizontalGroup(
+            jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        jDialog2Layout.setVerticalGroup(
+            jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -104,6 +104,11 @@ public class GUI extends javax.swing.JFrame {
 
         jButtonBuchungsfenster.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButtonBuchungsfenster.setText("Neue Buchung");
+        jButtonBuchungsfenster.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBuchungsfensterActionPerformed(evt);
+            }
+        });
 
         jLabelGesamtbetragZahl.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabelGesamtbetragZahl.setText("0,00€");
@@ -150,7 +155,18 @@ public class GUI extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButtonBuchungsfensterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuchungsfensterActionPerformed
+        // TODO add your handling code here:
+        
+        //Erstellung des EIngabefensters und Visibilität
+        EingabeGUI Eingabe = new EingabeGUI();
+        Eingabe.setVisible(true);
+        
+        
+    }//GEN-LAST:event_jButtonBuchungsfensterActionPerformed
 
     /**
      * @param args the command line arguments
@@ -189,7 +205,7 @@ public class GUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonBuchungsfenster;
-    private javax.swing.JDialog jDialog1;
+    private javax.swing.JDialog jDialog2;
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabelGesamtbetragZahl;
     private javax.swing.JLabel jLabelGesamtbetraganzeige;
