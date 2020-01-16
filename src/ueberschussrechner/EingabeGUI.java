@@ -35,9 +35,9 @@ public class EingabeGUI extends javax.swing.JFrame {
         jLabelBuchungsbetrag = new javax.swing.JLabel();
         buttonEinnahme = new java.awt.Button();
         buttonAusgabe = new java.awt.Button();
-        textBetrag = new java.awt.TextField();
         jFormattedTextFieldBuchungsdatum = new javax.swing.JFormattedTextField();
         jLabelTitelBuchung = new javax.swing.JLabel();
+        jFormattedTextFieldBuchungsbetrag = new javax.swing.JFormattedTextField();
 
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
         jDialog1.getContentPane().setLayout(jDialog1Layout);
@@ -64,8 +64,6 @@ public class EingabeGUI extends javax.swing.JFrame {
         jLabelTitel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabelTitel.setText("Überschussrechner");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
         jLabelBuchungsdatum.setText("Buchungsdatum");
 
         jLabelBuchungsbetrag.setText("Betrag");
@@ -85,9 +83,16 @@ public class EingabeGUI extends javax.swing.JFrame {
         });
 
         jFormattedTextFieldBuchungsdatum.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
+        jFormattedTextFieldBuchungsdatum.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFormattedTextFieldBuchungsdatumActionPerformed(evt);
+            }
+        });
 
         jLabelTitelBuchung.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabelTitelBuchung.setText("Buchung");
+
+        jFormattedTextFieldBuchungsbetrag.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,###.00"))));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -108,11 +113,10 @@ public class EingabeGUI extends javax.swing.JFrame {
                                 .addGap(10, 10, 10)))
                         .addComponent(buttonAusgabe, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabelTitelBuchung)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jFormattedTextFieldBuchungsdatum, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(45, 45, 45)
-                        .addComponent(textBetrag, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(48, 48, 48)))
+                        .addGap(61, 61, 61)
+                        .addComponent(jFormattedTextFieldBuchungsbetrag, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -124,9 +128,9 @@ public class EingabeGUI extends javax.swing.JFrame {
                     .addComponent(jLabelBuchungsdatum)
                     .addComponent(jLabelBuchungsbetrag))
                 .addGap(1, 1, 1)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jFormattedTextFieldBuchungsdatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textBetrag, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jFormattedTextFieldBuchungsbetrag, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(buttonEinnahme, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -135,6 +139,7 @@ public class EingabeGUI extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     ArrayList<Integer> einnahmen = new ArrayList<Integer>();
@@ -143,7 +148,7 @@ public class EingabeGUI extends javax.swing.JFrame {
     private void buttonEinnahmeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEinnahmeActionPerformed
         // Button Einnahme addet die Zahl zur ArrayList einnahmen. Ausgabe nur Pos 0 im Array.
         
-        String ergEinnahmen = textBetrag.getText();
+        String ergEinnahmen = jFormattedTextFieldBuchungsbetrag.getText();
         int zahlEinnahmen = 0;
         try{
             zahlEinnahmen = Integer.parseInt(ergEinnahmen);
@@ -151,13 +156,17 @@ public class EingabeGUI extends javax.swing.JFrame {
             //Fehlerbehandlung
         }
         einnahmen.add(zahlEinnahmen);
-        textBetrag.setText("");
+        jFormattedTextFieldBuchungsbetrag.setText("");
         System.out.println("Einnahmen Pos 0: " + einnahmen.get(0));
+        
+        //Schließt das Fenster falls man eine neue Eingabe getätigt hat, aber keine Ahnung ob wir das drinne lassen wollen -> oder ob man mehrere gleicheztig machen soll
+        setVisible(false);
+        //EingabeGUI.super.dispose(); würde auch gehen
     }//GEN-LAST:event_buttonEinnahmeActionPerformed
 
     private void buttonAusgabeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAusgabeActionPerformed
         // Button Ausgabe addet die Zahl zur ArrayList ausgaben. Ausgabe nur Pos 0 im Array.
-        String ergAusgaben = textBetrag.getText();
+        String ergAusgaben = jFormattedTextFieldBuchungsbetrag.getText();
         int zahlAusgaben = 0;
         try{
             zahlAusgaben  = Integer.parseInt(ergAusgaben );
@@ -165,9 +174,18 @@ public class EingabeGUI extends javax.swing.JFrame {
             //Fehlerbehandlung
         }
         ausgaben.add(zahlAusgaben );
-        textBetrag.setText("");
-        System.out.println("Einnahmen Pos 0: " + einnahmen.get(0));
+        jFormattedTextFieldBuchungsbetrag.setText("");
+        System.out.println("Einnahmen Pos 0: " + ausgaben.get(0));
+        
+        //Schließt das Fenster falls man eine neue Eingabe getätigt hat, aber keine Ahnung ob wir das drinne lassen wollen -> oder ob man mehrere gleicheztig machen soll
+        setVisible(false);
+        //EingabeGUI.super.dispose(); würde auch gehen
+        
     }//GEN-LAST:event_buttonAusgabeActionPerformed
+
+    private void jFormattedTextFieldBuchungsdatumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldBuchungsdatumActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jFormattedTextFieldBuchungsdatumActionPerformed
 
     /**
      * @param args the command line arguments
@@ -208,12 +226,12 @@ public class EingabeGUI extends javax.swing.JFrame {
     private java.awt.Button buttonAusgabe;
     private java.awt.Button buttonEinnahme;
     private javax.swing.JDialog jDialog1;
+    private javax.swing.JFormattedTextField jFormattedTextFieldBuchungsbetrag;
     private javax.swing.JFormattedTextField jFormattedTextFieldBuchungsdatum;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabelBuchungsbetrag;
     private javax.swing.JLabel jLabelBuchungsdatum;
     private javax.swing.JLabel jLabelTitel;
     private javax.swing.JLabel jLabelTitelBuchung;
-    private java.awt.TextField textBetrag;
     // End of variables declaration//GEN-END:variables
 }
