@@ -5,6 +5,8 @@
  */
 package ueberschussrechner;
 
+import java.util.*;
+
 /**
  *
  * @author Lenovo
@@ -17,7 +19,32 @@ public class GUI extends javax.swing.JFrame {
     public GUI() {
         initComponents();
     }
+    
+    //TEST
+    ArrayList<Integer> einnahmen = new ArrayList<Integer>();
+    ArrayList<Integer> ausgaben = new ArrayList<Integer>();
 
+    public ArrayList<Integer> getEinnahmen() {
+        return einnahmen;
+    }
+
+    public ArrayList<Integer> getAusgaben() {
+        return ausgaben;
+    }
+
+    public void setEinnahmen(ArrayList<Integer> einnahmen) {
+        this.einnahmen = einnahmen;
+    }
+
+    public void setAusgaben(ArrayList<Integer> ausgaben) {
+        this.ausgaben = ausgaben;
+    }
+    
+    
+    
+    String text;
+    int numero=0;
+    //TEST ENDE
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -33,7 +60,7 @@ public class GUI extends javax.swing.JFrame {
         jTableAnzeigetabelle = new javax.swing.JTable();
         jLabelTitel = new javax.swing.JLabel();
         jButtonBuchungsfenster = new javax.swing.JButton();
-        jLabelGesamtbetragZahl = new javax.swing.JLabel();
+        labelGesammtbetrag = new javax.swing.JLabel();
         jLabelGesamtbetraganzeige = new javax.swing.JLabel();
 
         jInternalFrame1.setVisible(true);
@@ -110,8 +137,8 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
-        jLabelGesamtbetragZahl.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabelGesamtbetragZahl.setText("0,00€");
+        labelGesammtbetrag.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        labelGesammtbetrag.setText("0,00€");
 
         jLabelGesamtbetraganzeige.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabelGesamtbetraganzeige.setText("Gesamtbetrag:");
@@ -128,11 +155,11 @@ public class GUI extends javax.swing.JFrame {
                 .addComponent(jButtonBuchungsfenster, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(37, Short.MAX_VALUE)
+                .addContainerGap(63, Short.MAX_VALUE)
                 .addComponent(jLabelGesamtbetraganzeige, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabelGesamtbetragZahl, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(92, 92, 92))
+                .addComponent(labelGesammtbetrag, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(85, 85, 85))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -149,7 +176,7 @@ public class GUI extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelGesamtbetragZahl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(labelGesammtbetrag, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabelGesamtbetraganzeige, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -158,6 +185,8 @@ public class GUI extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    
+
     private void jButtonBuchungsfensterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuchungsfensterActionPerformed
         // TODO add your handling code here:
         
@@ -165,6 +194,11 @@ public class GUI extends javax.swing.JFrame {
         EingabeGUI Eingabe = new EingabeGUI();
         Eingabe.setVisible(true);
         
+        //Hier wird der Text geändert sobald man auf den Buchungs Knopf drückt.
+        //TEST
+        numero = 12;
+        text = String.valueOf(numero);
+        labelGesammtbetrag.setText(text + "€");
         
     }//GEN-LAST:event_jButtonBuchungsfensterActionPerformed
 
@@ -207,10 +241,10 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JButton jButtonBuchungsfenster;
     private javax.swing.JDialog jDialog2;
     private javax.swing.JInternalFrame jInternalFrame1;
-    private javax.swing.JLabel jLabelGesamtbetragZahl;
     private javax.swing.JLabel jLabelGesamtbetraganzeige;
     private javax.swing.JLabel jLabelTitel;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableAnzeigetabelle;
+    private javax.swing.JLabel labelGesammtbetrag;
     // End of variables declaration//GEN-END:variables
 }
