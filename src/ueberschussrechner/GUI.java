@@ -6,6 +6,8 @@
 package ueberschussrechner;
 
 import java.util.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.*;
 
 /**
  *
@@ -20,22 +22,24 @@ public class GUI extends javax.swing.JFrame {
         initComponents();
         obereZeile[0] = new ArrayList();
         obereZeile[1] = new ArrayList();
+        obereZeile[2] = new ArrayList();
+        obereZeile[3] = new ArrayList();
+        obereZeile[4] = new ArrayList();
     }
-    
+
     //TEST
     ArrayList<Integer> einnahmen = new ArrayList<Integer>();
     ArrayList<Integer> ausgaben = new ArrayList<Integer>();
-    
 
     ArrayList<ArrayList> buchungsliste = new ArrayList<ArrayList>();
-        
-    ArrayList[] obereZeile = new ArrayList[2];
-   
-    
-    
-    String text;
-    int numero=0;
 
+    ArrayList[] obereZeile = new ArrayList[6];
+
+    String text;
+    int numero = 0;
+    
+   
+   
     //TEST ENDE
     /**
      * This method is called from within the constructor to initialize the form.
@@ -46,8 +50,6 @@ public class GUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jInternalFrame1 = new javax.swing.JInternalFrame();
-        jDialog2 = new javax.swing.JDialog();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableAnzeigetabelle = new javax.swing.JTable();
         jLabelTitel = new javax.swing.JLabel();
@@ -60,62 +62,24 @@ public class GUI extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         buttonListenAusgabe = new java.awt.Button();
-
-        jInternalFrame1.setVisible(true);
-
-        javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
-        jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
-        jInternalFrame1Layout.setHorizontalGroup(
-            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jInternalFrame1Layout.setVerticalGroup(
-            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout jDialog2Layout = new javax.swing.GroupLayout(jDialog2.getContentPane());
-        jDialog2.getContentPane().setLayout(jDialog2Layout);
-        jDialog2Layout.setHorizontalGroup(
-            jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        jDialog2Layout.setVerticalGroup(
-            jDialog2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        button1 = new java.awt.Button();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jTableAnzeigetabelle.setAutoCreateRowSorter(true);
         jTableAnzeigetabelle.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
-                "Buchungsdatum", "Einnahmen", "Ausgaben"
+                "Nr.:", "Buchungsdatum", "Einnahmen", "Ausgaben", "Kommentare"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Double.class, java.lang.Double.class, java.lang.Double.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -128,7 +92,9 @@ public class GUI extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTableAnzeigetabelle);
         if (jTableAnzeigetabelle.getColumnModel().getColumnCount() > 0) {
+            jTableAnzeigetabelle.getColumnModel().getColumn(1).setResizable(false);
             jTableAnzeigetabelle.getColumnModel().getColumn(2).setResizable(false);
+            jTableAnzeigetabelle.getColumnModel().getColumn(3).setResizable(false);
         }
 
         jLabelTitel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -178,19 +144,23 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
+        button1.setLabel("button1");
+        button1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 536, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 527, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelGesamtbetraganzeige, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonListenAusgabe, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jLabelGesamtbetraganzeige, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labelGesammtbetrag, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(29, 29, 29)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -199,7 +169,9 @@ public class GUI extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(buttonEinnahme, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(buttonAusgabe, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(buttonAusgabe, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(labelGesammtbetrag, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(75, 75, 75))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -209,6 +181,7 @@ public class GUI extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(22, 22, 22)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(buttonListenAusgabe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jFormattedTextFieldBuchungsdatum, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -225,30 +198,38 @@ public class GUI extends javax.swing.JFrame {
                     .addComponent(labelGesammtbetrag, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabelGesamtbetraganzeige, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE))
                 .addGap(21, 21, 21)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jFormattedTextFieldBuchungsdatum)
-                    .addComponent(textfeldBetrag))
+                .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(buttonEinnahme, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonAusgabe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buttonListenAusgabe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(56, 56, 56))
+                    .addComponent(jFormattedTextFieldBuchungsdatum)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(buttonListenAusgabe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(textfeldBetrag)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(buttonEinnahme, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(buttonAusgabe, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(99, 99, 99))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel2)
+                        .addContainerGap())))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    
 
     private void textfeldBetragActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textfeldBetragActionPerformed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_textfeldBetragActionPerformed
 
     private void jFormattedTextFieldBuchungsdatumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextFieldBuchungsdatumActionPerformed
@@ -260,69 +241,66 @@ public class GUI extends javax.swing.JFrame {
 
         String ergEinnahmen = textfeldBetrag.getText();
         int zahlEinnahmen = 0;
-        try{
+        try {
             zahlEinnahmen = Integer.parseInt(ergEinnahmen);
-        }catch(NumberFormatException ex){
+        } catch (NumberFormatException ex) {
             //Fehlerbehandlung
         }
         this.einnahmen.add(zahlEinnahmen);
-        obereZeile[0].add(textfeldBetrag.getText());
-        
+        obereZeile[2].add(textfeldBetrag.getText());
+
         textfeldBetrag.setText("");
 
         System.out.println("Einnahmen Pos 0: " + einnahmen.get(0));
-        
-        
+
         //Label stuff
         System.out.println("Bis hier no fehler");
-        
+
         numero = einnahmen.get(0);
         text = String.valueOf(numero);
         labelGesammtbetrag.setText(text + "€");
-        
-        
-        
+
         //Testweise Ausgabe! Funktioniert, nur nicht bei dem Button!
-       // for (int i = 0;i<einnahmen.size();i++){
-       //     System.out.println(einnahmen.get(i));
-       // }
-       
-       
-       
-        
-        
-        
+        // for (int i = 0;i<einnahmen.size();i++){
+        //     System.out.println(einnahmen.get(i));
+        // }
+
     }//GEN-LAST:event_buttonEinnahmeActionPerformed
 
     private void buttonAusgabeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAusgabeActionPerformed
         // Button Ausgabe addet die Zahl zur ArrayList ausgaben. Ausgabe nur Pos 0 im Array.
         String ergAusgaben = textfeldBetrag.getText();
         int zahlAusgaben = 0;
-        try{
-            zahlAusgaben  = Integer.parseInt(ergAusgaben);
-        }catch(NumberFormatException ex){
+        try {
+            zahlAusgaben = Integer.parseInt(ergAusgaben);
+        } catch (NumberFormatException ex) {
             //Fehlerbehandlung
         }
         ausgaben.add(zahlAusgaben);
-        obereZeile[1].add(textfeldBetrag.getText());
-        
-        
-        
+        obereZeile[3].add(textfeldBetrag.getText());
+
         textfeldBetrag.setText("");
         System.out.println("Ausgaben Pos 0: " + ausgaben.get(0));
     }//GEN-LAST:event_buttonAusgabeActionPerformed
 
     private void buttonListenAusgabeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonListenAusgabeActionPerformed
         // TODO add your handling code here:
-        buchungsliste.add(obereZeile[0]);
-        buchungsliste.add(obereZeile[1]);
-        for (ListIterator<ArrayList> li = buchungsliste.listIterator(0); li.hasNext();){
-            for(ListIterator li2 = li.next().listIterator(0); li2.hasNext(); ){
-		System.out.println(li2.next());	
+        buchungsliste.add(obereZeile[2]);
+        buchungsliste.add(obereZeile[3]);
+        for (ListIterator<ArrayList> li = buchungsliste.listIterator(0); li.hasNext();) {
+            for (ListIterator li2 = li.next().listIterator(0); li2.hasNext();) {
+                System.out.println(li2.next());
             }
         }
         buchungsliste.clear();
     }//GEN-LAST:event_buttonListenAusgabeActionPerformed
+
+    private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) jTableAnzeigetabelle.getModel();
+        model.addRow(einnahmen.get(0));
+
+    }//GEN-LAST:event_button1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -360,12 +338,11 @@ public class GUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private java.awt.Button button1;
     private java.awt.Button buttonAusgabe;
     private java.awt.Button buttonEinnahme;
     private java.awt.Button buttonListenAusgabe;
-    private javax.swing.JDialog jDialog2;
     private javax.swing.JFormattedTextField jFormattedTextFieldBuchungsdatum;
-    private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabelGesamtbetraganzeige;
