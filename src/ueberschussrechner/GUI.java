@@ -37,7 +37,7 @@ public class GUI extends javax.swing.JFrame {
     
     //haufen Variablen für den spaß den wir haben YAS
     String text;
-    double numero = 0;
+    double ueberschuss = 0;
     int counterEinnahmen = 0;
     int counterAusgaben = 0;
     int counterTableIndex = 0;
@@ -308,7 +308,7 @@ public class GUI extends javax.swing.JFrame {
         csv.write("\n");
         csv.write("\n");
         csv.write("\n");
-        csv.write("Ueberschuss Gesammt: " + numero);
+        csv.write("Ueberschuss Gesammt: " + ueberschuss);
         csv.close();
         counterSave++; //Für die einfache mehrfachspeicherung 
     } catch (IOException e) {
@@ -378,8 +378,8 @@ public class GUI extends javax.swing.JFrame {
         }
         
         //Label wird gesetzt + math
-        numero = einnahmenZusammen - ausgabenZusammen; //Berechnung des Überschusses
-        text = String.valueOf(numero); //Das ergebnis wird in einen String konvertiert
+        ueberschuss = einnahmenZusammen - ausgabenZusammen; //Berechnung des Überschusses
+        text = String.valueOf(ueberschuss); //Das ergebnis wird in einen String konvertiert
         labelGesammtbetrag.setText(text + "€"); //Das label bekommt den String zugewiesen sowie das Euro zeichen drangehängt
         
         //Setzt werte auf Null damit keine falsche neuberechnung
